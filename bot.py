@@ -2,21 +2,21 @@ import discord
 import random
 from discord.ext import commands
 
-client = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!')
 
 
 # Events
-@client.event
+@bot.event
 async def on_ready():
     print('Bot: On ready')
 
 
-@client.event
+@bot.event
 async def on_member_join(member):
     print(f'{member} has joined a server')
 
 
-@client.event
+@bot.event
 async def on_member_remove(member):
     print(f'{member} has been cut')
 
@@ -28,7 +28,7 @@ async def on_member_remove(member):
 
 
 # Commands
-@client.command(aliases=['what-game', 'What-game'])
+@bot.command(aliases=['what-game', 'What-game'])
 async def game_to_play(ctx):
     games = ['Counter-Strike',
              'Project Winter',
@@ -44,19 +44,19 @@ async def game_to_play(ctx):
     print(f'Game to play: {game}')
 
 
-@client.command(aliases=['what-team'])
+@bot.command(aliases=['what-team'])
 async def what_team(ctx):
     await ctx.send('Wildcats')
     print('What Team? Wildcats')
 
 
-@client.command()
+@bot.command()
 async def wildcats(ctx):
     await ctx.send('Get\'cha Head in the Game')
     print('Wildcats!, Get\'cha Head in the Game')
 
 
-@client.command(aliases=['8Ball', '8ball'])
+@bot.command(aliases=['8Ball', '8ball'])
 async def _8ball(ctx, *, question):
     if question.lower() in ["is leon gay?"]:
         await ctx.send('8Ball says "Definitely"')
@@ -93,4 +93,4 @@ async def _8ball_error(ctx, error):
         await ctx.send('Ask a question you dumb fuck')
 
 
-client.run('NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s')
+bot.run('NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s')
