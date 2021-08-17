@@ -4,6 +4,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
 
+bot_token = 'NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s'
 
 # Events
 @bot.event
@@ -93,4 +94,4 @@ async def _8ball_error(ctx, error):
         await ctx.send('Ask a question you dumb fuck')
 
 
-bot.run('NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s')
+bot.run(bot_token)
