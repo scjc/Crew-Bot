@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import discord
 import random
 from discord.ext import commands
@@ -7,6 +8,7 @@ bot = commands.Bot(command_prefix='!')
 bot_token = 'NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s'
 
 # Events
+
 
 @bot.event
 async def on_ready():
@@ -35,10 +37,15 @@ async def on_member_remove(member):
 # Play Game
 
 @bot.command(aliases=['game', 'Play'])
-async def play(ctx, arg1, arg2):
-    if arg1 == 'add':
-        print('added' + arg2)
-    if arg1 == 'play':
+# take any number of args (args stored as an array)
+async def play(ctx, *args):
+    if len(args) > 0:
+        if args[0] == 'add':
+            print('added ' + args[1])
+            msg = 'You should play ' + args[1]
+        elif args[0] == 'game':
+            print('test')
+    else:
         games = ['Counter-Strike',
                  'Project Winter',
                  'Minecraft',
@@ -49,19 +56,10 @@ async def play(ctx, arg1, arg2):
                  'TableTop Simulator',
                  'Fifa']
         game = random.choice(games)
-        msg = 'You should play {game}'
+        msg = 'You should play ' + game
         print(f'game: play {game}')
-    else:
-        print('game: invalid command')
-        msg = 'Invalid Args'
 
     await ctx.send(f'{msg}')
-
-@play.error
-async def _game_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('To use the game command please... game play')
-
 
 # High School Musical Commands
 
