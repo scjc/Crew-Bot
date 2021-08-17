@@ -9,7 +9,7 @@ bot_token = 'NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s'
 # Events
 @bot.event
 async def on_ready():
-    print('Bot: On ready')
+    print('Crew Bot: On ready')
 
 
 @bot.event
