@@ -1,10 +1,10 @@
-from asyncio.windows_events import NULL
+from games_file import game_file
 import discord
 import random
+import json
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
-
 bot_token = 'NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s'
 
 # Events
@@ -39,6 +39,11 @@ async def on_member_remove(member):
 @bot.command(aliases=['game', 'Play'])
 # take any number of args (args stored as an array)
 async def play(ctx, *args):
+
+    # load games JSON file
+    games_file_obj = game_file('games.json')
+    games_list = games_file_obj.latest_game_array()
+
     if len(args) > 0:
         if args[0] == 'add':
             print('added ' + args[1])
@@ -46,22 +51,14 @@ async def play(ctx, *args):
         elif args[0] == 'game':
             print('test')
     else:
-        games = ['Counter-Strike',
-                 'Project Winter',
-                 'Minecraft',
-                 'League of Legends',
-                 'Valorant',
-                 'Pummel Party',
-                 'Jackbox',
-                 'TableTop Simulator',
-                 'Fifa']
-        game = random.choice(games)
+        game = random.choice(games_list)
         msg = 'You should play ' + game
         print(f'game: play {game}')
 
     await ctx.send(f'{msg}')
 
 # High School Musical Commands
+
 
 @bot.command(aliases=['what-team'])
 async def what_team(ctx):
