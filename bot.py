@@ -7,6 +7,7 @@ bot = commands.Bot(command_prefix='!')
 bot_token = 'NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s'
 
 # Events
+
 @bot.event
 async def on_ready():
     print('Crew Bot: On ready')
@@ -29,21 +30,40 @@ async def on_member_remove(member):
 
 
 # Commands
-@bot.command(aliases=['what-game', 'What-game'])
-async def game_to_play(ctx):
-    games = ['Counter-Strike',
-             'Project Winter',
-             'Minecraft',
-             'League of Legends',
-             'Valorant',
-             'Pummel Party',
-             'Jackbox',
-             'TableTop Simulator',
-             'Fifa']
-    game = random.choice(games)
-    await ctx.send(f'You should play "{game}"')
-    print(f'Game to play: {game}')
 
+
+# Play Game
+
+@bot.command(aliases=['game', 'Play'])
+async def play(ctx, arg1, arg2):
+    if arg1 == 'add':
+        print('added' + arg2)
+    if arg1 == 'play':
+        games = ['Counter-Strike',
+                 'Project Winter',
+                 'Minecraft',
+                 'League of Legends',
+                 'Valorant',
+                 'Pummel Party',
+                 'Jackbox',
+                 'TableTop Simulator',
+                 'Fifa']
+        game = random.choice(games)
+        msg = 'You should play {game}'
+        print(f'game: play {game}')
+    else:
+        print('game: invalid command')
+        msg = 'Invalid Args'
+
+    await ctx.send(f'{msg}')
+
+@play.error
+async def _game_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('To use the game command please... game play')
+
+
+# High School Musical Commands
 
 @bot.command(aliases=['what-team'])
 async def what_team(ctx):
@@ -56,6 +76,8 @@ async def wildcats(ctx):
     await ctx.send('Get\'cha Head in the Game')
     print('Wildcats!, Get\'cha Head in the Game')
 
+
+# 8Ball
 
 @bot.command(aliases=['8Ball', '8ball'])
 async def _8ball(ctx, *, question):
