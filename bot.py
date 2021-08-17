@@ -48,8 +48,10 @@ async def play(ctx, *args):
         if args[0] == 'add':
             print('added ' + args[1])
             msg = 'You should play ' + args[1]
-        elif args[0] == 'game':
-            print('test')
+        elif args[0] == 'remove':
+            print('removed ')
+        elif args[0] == 'list':
+            print('all games: ')
     else:
         game = random.choice(games_list)
         msg = 'You should play ' + game
