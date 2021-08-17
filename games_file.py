@@ -34,10 +34,6 @@ class game_file:
             with open('games.json', 'w') as outfile:
                 json.dumps(array)
 
-
             return True
         else:
             return False
-
-
-
