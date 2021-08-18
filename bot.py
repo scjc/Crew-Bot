@@ -7,11 +7,22 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix='!')
 bot_token = 'NzIyNDg2Mzg5NjAxNzMwNjYx.Xu1OaA.BCY6jc2nCTUNpWDkDRrNQRDNo8s'
 
+games_file_obj = object
+games_list = []
+
 # Events
 
 
 @bot.event
 async def on_ready():
+
+    global games_list, games_file_obj
+
+    # load games JSON file
+    games_file_obj = game_file('games.json')
+    games_list = games_file_obj.latest_game_array()
+    print('loading: games_list')
+
     print('Crew Bot: On ready')
 
 
@@ -40,9 +51,7 @@ async def on_member_remove(member):
 # take any number of args (args stored as an array)
 async def play(ctx, *args):
 
-    # load games JSON file
-    games_file_obj = game_file('games.json')
-    games_list = games_file_obj.latest_game_array()
+    global games_list, games_file_obj
 
     if len(args) > 0:
         if args[0] == 'add':
