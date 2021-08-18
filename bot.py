@@ -58,7 +58,16 @@ async def play(ctx, *args):
                 msg = 'please type a game title'
 
         elif args[0] == 'remove':
-            print('removed ')
+            if len(args) > 1:
+                game_title = args[1]
+                removed = games_file_obj.remove_game(game_title, games_list)
+                if removed:
+                    print('removed ' + args[1])
+                    msg = 'removed ' + args[1] + ' from the list'
+                else:
+                    msg = 'game not found'
+            else:
+                msg = 'please type a game title'
         elif args[0] == 'list':
             print('all games: ')
     else:

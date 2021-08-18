@@ -29,6 +29,27 @@ class game_file:
             # add to array
             array.append(title)
 
+            #TODO: refactor into own function
+            with open('games.json', 'w') as outfile:
+                new_games_json = json.dumps(array)
+                outfile.seek(0)
+                outfile.write(new_games_json)
+                outfile.truncate()
+
+            return True
+        else:
+            return False
+
+    def remove_game(self, title: str, array):
+        # convert string to lowercase
+        title.lower()
+
+        # check it does not exisit
+        if title in array:
+            # add to array
+            array.remove(title)
+
+            #TODO: refactor into own function
             with open('games.json', 'w') as outfile:
                 new_games_json = json.dumps(array)
                 outfile.seek(0)
