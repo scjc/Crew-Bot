@@ -68,8 +68,8 @@ async def play(ctx, *args):
                     msg = 'game not found'
             else:
                 msg = 'please type a game title'
-        elif args[0] == 'list':
-            print('all games: ')
+        elif args[0] == 'list-all':
+            msg = 'all games: ' + ' '.join(games_list)
     else:
         game = random.choice(games_list)
         msg = 'You should play ' + game
